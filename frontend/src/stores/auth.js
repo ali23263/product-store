@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
       loading.value = true
       const response = await authAPI.login(credentials)
       
-      token.value = response.data.token
+      token.value = response.data.access_token
       user.value = response.data.user
       
       localStorage.setItem('auth_token', token.value)
@@ -62,7 +62,7 @@ export const useAuthStore = defineStore('auth', () => {
       loading.value = true
       const response = await authAPI.register(userData)
       
-      token.value = response.data.token
+      token.value = response.data.access_token
       user.value = response.data.user
       
       localStorage.setItem('auth_token', token.value)

@@ -222,7 +222,7 @@ const getCountByStatus = (status) => {
 onMounted(async () => {
   loading.value = true
   try {
-    await ordersStore.fetchOrders()
+    await ordersStore.fetchPickerOrders()
   } finally {
     loading.value = false
   }

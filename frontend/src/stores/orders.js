@@ -24,6 +24,19 @@ export const useOrdersStore = defineStore('orders', () => {
     }
   }
 
+  const fetchPickerOrders = async (params = {}) => {
+    try {
+      loading.value = true
+      const response = await ordersAPI.getAllPicker(params)
+      orders.value = response.data.data || response.data
+    } catch (error) {
+      showToast('Failed to load orders', 'error')
+      console.error('Fetch picker orders error:', error)
+    } finally {
+      loading.value = false
+    }
+  }
+
   const fetchOrderById = async (id) => {
     try {
       loading.value = true
@@ -111,6 +124,7 @@ export const useOrdersStore = defineStore('orders', () => {
     appliedPromo,
     loading,
     fetchOrders,
+    fetchPickerOrders,
     fetchOrderById,
     createOrder,
     updateOrderStatus,

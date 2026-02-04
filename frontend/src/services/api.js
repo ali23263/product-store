@@ -79,6 +79,7 @@ export const ordersAPI = {
   applyPromo: (code) => api.post('/orders/apply-promo', { code }),
   getAllAdmin: (params) => api.get('/admin/orders', { params }),
   updateStatusAdmin: (id, status) => api.put(`/admin/orders/${id}/status`, { status }),
+  getAllPicker: (params) => api.get('/picker/orders', { params }),
 }
 
 // Promo codes endpoints

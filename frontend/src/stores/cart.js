@@ -31,7 +31,9 @@ export const useCartStore = defineStore('cart', () => {
       try {
         loading.value = true
         const response = await cartAPI.getCart()
-        items.value = response.data.items?.map(item => ({
+        // Backend returns { cart: { items: [...] }, total }
+        const cartItems = response.data.cart?.items || response.data.items || []
+        items.value = cartItems.map(item => ({
           id: item.product_id,
           cartItemId: item.id,
           name: item.product?.name || item.product_name,
@@ -70,15 +72,20 @@ export const useCartStore = defineStore('cart', () => {
         loading.value = true
         const response = await cartAPI.addItem(product.id, quantity)
         
+        // Backend returns { cart: { items: [...] }, message }
+        // Find the cart item for this product to get the ID
+        const cartItems = response.data.cart?.items || []
+        const addedItem = cartItems.find(item => item.product_id === product.id)
+        
         const existingItem = items.value.find(item => item.id === product.id)
         if (existingItem) {
           existingItem.quantity += quantity
-          existingItem.cartItemId = response.data.id
+          existingItem.cartItemId = addedItem?.id
           showToast(`Updated ${product.name} quantity`, 'success')
         } else {
           items.value.push({
             id: product.id,
-            cartItemId: response.data.id,
+            cartItemId: addedItem?.id,
             name: product.name,
             price: product.price,
             image: product.image,

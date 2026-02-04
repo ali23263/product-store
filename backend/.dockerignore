@@ -1,0 +1,41 @@
+# Dependencies
+/vendor
+/node_modules
+
+# Laravel specific
+.env
+.env.backup
+.env.production
+/storage/*.key
+/storage/logs
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/bootstrap/cache/*
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.phpunit.result.cache
+coverage
+
+# Build files
+.git
+.gitignore
+.gitattributes
+README.md
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

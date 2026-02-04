@@ -48,3 +48,11 @@ You are working in a product-store project with:
 - Include clear comments in configuration files
 - Ensure services start in correct order with depends_on
 - Configure appropriate resource limits
+
+## Efficiency Guidelines
+
+- Run tests ONCE after changes, not multiple times
+- Do not create verbose summaries or documentation after every change
+- Do not run code review on your own changes
+- Move to next task immediately after completion
+- Focus on results, not excessive verification

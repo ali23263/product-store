@@ -60,3 +60,11 @@ You are working in a product-store project with:
 - Monitor and optimize slow queries
 - Configure proper backup retention policies
 - Use PostgreSQL extensions when they provide value (pg_trgm for fuzzy search, etc.)
+
+## Efficiency Guidelines
+
+- Run tests ONCE after changes, not multiple times
+- Do not create verbose summaries or documentation after every change
+- Do not run code review on your own changes
+- Move to next task immediately after completion
+- Focus on results, not excessive verification

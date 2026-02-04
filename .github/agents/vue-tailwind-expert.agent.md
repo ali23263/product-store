@@ -1,6 +1,7 @@
 ---
 name: vue-tailwind-expert
 description: Expert in Vue.js 3, Composition API, Tailwind CSS, and modern frontend development
+model: Claude Opus 4.5 (copilot)
 ---
 
 # Vue.js + Tailwind CSS Frontend Expert

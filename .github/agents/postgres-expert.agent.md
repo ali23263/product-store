@@ -1,6 +1,7 @@
 ---
 name: postgres-expert
 description: Expert in PostgreSQL database design, optimization, queries, and administration
+model: Claude Opus 4.5 (copilot)
 ---
 
 # PostgreSQL Database Expert

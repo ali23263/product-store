@@ -1,6 +1,7 @@
 ---
 name: laravel-expert
 description: Expert in Laravel PHP framework, API development, Eloquent ORM, and backend architecture
+model: Claude Opus 4.5 (copilot)
 ---
 
 # Laravel Backend Expert

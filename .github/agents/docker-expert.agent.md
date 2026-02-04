@@ -1,6 +1,7 @@
 ---
 name: docker-expert
 description: Expert in Docker, Docker Compose, containerization, and deployment configurations
+model: Claude Opus 4.5 (copilot)
 ---
 
 # Docker & Docker Compose Expert

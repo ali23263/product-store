@@ -1,6 +1,7 @@
 ---
 name: fullstack-integrator
 description: Expert in full-stack integration, coordinating Docker, Laravel, PostgreSQL, and Vue.js+Tailwind stack
+model: Claude Opus 4.5 (copilot)
 ---
 
 # Full-Stack Integration Expert

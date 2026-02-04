@@ -1,7 +1,7 @@
 ---
 name: e-commerce-frontend
 description: Expert Vue.js 3 developer for e-commerce with Tailwind CSS, Pinia stores, API integration, and responsive design
-model: claude-3-5-sonnet
+model: Claude Opus 4.5 (copilot)
 ---
 
 # E-Commerce Frontend Expert (Vue.js 3 + Tailwind CSS)

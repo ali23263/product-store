@@ -1,7 +1,7 @@
 ---
 name: e-commerce-database
 description: PostgreSQL database expert for e-commerce with products, orders, cart, promo codes, users, and performance optimization
-model: claude-3-5-sonnet
+model: Claude Opus 4.5 (copilot)
 ---
 
 # E-Commerce Database Expert (PostgreSQL)

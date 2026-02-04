@@ -1,7 +1,7 @@
 ---
 name: e-commerce-fullstack
 description: Full-stack integrator for Laravel + Vue.js + PostgreSQL e-commerce with Docker. Coordinates all layers: database, backend API, frontend UI, authentication, deployment.
-model: claude-3-5-sonnet
+model: Claude Opus 4.5 (copilot)
 ---
 
 # E-Commerce Full-Stack Integrator

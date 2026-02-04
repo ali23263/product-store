@@ -1,7 +1,7 @@
 ---
 name: e-commerce-backend
 description: Expert Laravel developer for e-commerce with products, cart, orders, promo codes, roles (customer, admin, picker)
-model: claude-3-5-sonnet
+model: Claude Opus 4.5 (copilot)
 ---
 
 # E-Commerce Backend Expert (Laravel)

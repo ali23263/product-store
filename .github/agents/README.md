@@ -152,6 +152,6 @@ The platform supports three user roles:
 
 ## 🔧 Configuration
 
-Agents use `claude-3-5-sonnet` model for optimal performance and accuracy.
+Agents use `Claude Opus 4.5 (copilot)` model for optimal performance and accuracy.
 
 For customization, edit the `.agent.md` files directly with your project-specific requirements.

@@ -1,161 +1,157 @@
-# Custom Development Agents
+# Custom Agents for Product Store E-Commerce Platform
 
-This directory contains custom GitHub Copilot agents specifically designed for the product-store project's tech stack.
+This directory contains custom GitHub Copilot agents specialized for building a modern e-commerce platform with Laravel, Vue.js, PostgreSQL, and Docker.
 
-## Available Agents
+## 🤖 Available Agents
 
-### 🐳 docker-expert
-**Name**: `docker-expert`  
-**Description**: Expert in Docker, Docker Compose, containerization, and deployment configurations
+### 1. [e-commerce-backend](./e-commerce-backend.agent.md)
+**Expert Laravel developer for e-commerce**
 
-**Use for**:
-- Creating and optimizing docker-compose.yml files
-- Writing and improving Dockerfiles
-- Container networking and service orchestration
-- Volume and data persistence configuration
-- Docker security and performance optimization
-- Troubleshooting container issues
+Specializes in:
+- Product catalog management
+- Shopping cart & orders
+- Promo codes & discounts
+- Role-based authentication (customer, admin, picker)
+- RESTful API design
+- PostgreSQL integration
 
-### 🚀 laravel-expert
-**Name**: `laravel-expert`  
-**Description**: Expert in Laravel PHP framework, API development, Eloquent ORM, and backend architecture
+Use for: Backend features, database migrations, API endpoints, business logic
 
-**Use for**:
-- Laravel API development and RESTful endpoints
-- Eloquent models, relationships, and migrations
-- Authentication and authorization (Sanctum/Passport)
-- Request validation and form requests
-- Query optimization and caching
-- Laravel testing (PHPUnit)
-- Backend business logic implementation
+---
 
-### 🐘 postgres-expert
-**Name**: `postgres-expert`  
-**Description**: Expert in PostgreSQL database design, optimization, queries, and administration
+### 2. [e-commerce-frontend](./e-commerce-frontend.agent.md)
+**Expert Vue.js 3 + Tailwind CSS developer**
 
-**Use for**:
-- Database schema design and modeling
-- SQL query optimization and performance tuning
-- PostgreSQL-specific features (JSONB, arrays, full-text search)
-- Index creation and optimization
-- Migration review and optimization
-- Database constraints and data integrity
-- Backup and recovery strategies
+Specializes in:
+- Product catalog UI
+- Shopping cart & checkout
+- User authentication pages
+- Customer dashboard
+- Admin panel interface
+- Order picker interface
+- Pinia state management
+- Responsive design
 
-### 🎨 vue-tailwind-expert
-**Name**: `vue-tailwind-expert`  
-**Description**: Expert in Vue.js 3, Composition API, Tailwind CSS, and modern frontend development
+Use for: Frontend components, pages, state management, API integration
 
-**Use for**:
-- Vue.js 3 component development (Composition API)
-- Tailwind CSS styling and responsive design
-- Vue Router setup and navigation
-- State management with Pinia
-- API integration with Laravel backend
-- Form handling and validation
-- Frontend performance optimization
-- Component testing
+---
 
-### 🔗 fullstack-integrator
-**Name**: `fullstack-integrator`  
-**Description**: Expert in full-stack integration, coordinating Docker, Laravel, PostgreSQL, and Vue.js+Tailwind stack
+### 3. [e-commerce-database](./e-commerce-database.agent.md)
+**PostgreSQL database expert for e-commerce**
 
-**Use for**:
-- Complete project setup and initialization
-- Full-stack architecture decisions
-- Integrating Vue.js frontend with Laravel backend
-- End-to-end authentication implementation
-- CORS and API communication setup
-- Multi-service Docker orchestration
-- Environment configuration across services
-- Cross-stack debugging and troubleshooting
-- Deployment strategies
+Specializes in:
+- Database schema design
+- Product & order data models
+- Performance optimization
+- Indexing strategies
+- Data integrity & constraints
+- Migration design
 
-## Tech Stack
+Use for: Database structure, migrations, performance optimization, seeders
 
-This project uses:
-- **Frontend**: Vue.js 3 + Tailwind CSS
-- **Backend**: Laravel (PHP)
-- **Database**: PostgreSQL
-- **Containerization**: Docker Compose
+---
 
-## How to Use These Agents
+### 4. [e-commerce-fullstack](./e-commerce-fullstack.agent.md)
+**Full-stack integrator for complete e-commerce platform**
 
-### In GitHub Copilot Chat
+Specializes in:
+- End-to-end feature coordination
+- Authentication flow (Sanctum + Vue.js)
+- API integration between Laravel and Vue.js
+- Docker orchestration
+- Deployment strategy
+- Cross-layer debugging
 
-You can invoke these agents in GitHub Copilot Chat using the `@` mention syntax:
+Use for: Complete features that span all layers, integration work, architecture decisions
+
+---
+
+## 🎯 How to Use
+
+### In GitHub Copilot Chat on GitHub.com
 
 ```
-@docker-expert Create a docker-compose.yml file for Laravel, PostgreSQL, and Vue.js
-
-@laravel-expert Set up a Product model with CRUD API endpoints
-
-@postgres-expert Design a database schema for an e-commerce product catalog
-
-@vue-tailwind-expert Create a responsive product listing component
-
-@fullstack-integrator Set up the complete development environment with authentication
+@e-commerce-backend Create product API with categories, images, and inventory tracking
 ```
 
-### Choosing the Right Agent
-
-- **Single technology task**: Use the specific expert (docker-expert, laravel-expert, etc.)
-- **Multi-technology integration**: Use fullstack-integrator
-- **Not sure**: Start with fullstack-integrator; it can coordinate with other agents
-
-### Examples
-
-#### Example 1: Setting up a new feature
 ```
-@fullstack-integrator I need to add a shopping cart feature. 
-Set up the database schema, Laravel API, and Vue.js components.
+@e-commerce-frontend Build shopping cart page with quantity controls and real-time updates
 ```
 
-#### Example 2: Optimizing performance
 ```
-@postgres-expert The product search query is slow. 
-Here's the query: [paste query]
-Can you optimize it?
+@e-commerce-database Design promo codes table with expiration and usage limits
 ```
 
-#### Example 3: Docker issues
 ```
-@docker-expert The Laravel container can't connect to PostgreSQL. 
-Here's my docker-compose.yml: [paste file]
+@e-commerce-fullstack Implement complete checkout flow with promo code validation
 ```
 
-#### Example 4: Frontend component
+### In VS Code with GitHub Copilot
+
+1. Open the Copilot Chat panel
+2. Type `@` followed by the agent name
+3. Describe your task
+4. Agent will provide specialized assistance
+
+## 🚀 Quick Examples
+
+### Creating a New Product Feature
+
 ```
-@vue-tailwind-expert Create a product card component with 
-image, title, price, and "Add to Cart" button using Tailwind CSS
+@e-commerce-database Create products table with categories, pricing, stock
+@e-commerce-backend Implement product CRUD API with validation
+@e-commerce-frontend Build product listing page with filters and add-to-cart
+@e-commerce-fullstack Test complete flow and fix any integration issues
 ```
 
-## Agent Capabilities
+### Adding Promo Codes
 
-Each agent has:
-- ✅ Deep expertise in their specific domain
-- ✅ Knowledge of best practices and patterns
-- ✅ Understanding of the complete tech stack context
-- ✅ Ability to write, review, and optimize code
-- ✅ Debugging and troubleshooting skills
-- ✅ Documentation capabilities
+```
+@e-commerce-database Design promo_codes table with expiration and usage tracking
+@e-commerce-backend Implement promo code validation in checkout flow
+@e-commerce-frontend Add promo code input field to checkout page
+@e-commerce-fullstack Coordinate cart sync and discount application
+```
 
-## Best Practices
+## ⚡ Efficiency Features
 
-1. **Be specific**: Provide context and clear requirements
-2. **Share code**: Include relevant code snippets or file paths
-3. **Iterate**: Agents can refine solutions based on feedback
-4. **Combine agents**: Use fullstack-integrator for cross-cutting concerns
-5. **Error messages**: Always include full error messages when debugging
+All agents are configured with **Efficiency Guidelines** to avoid:
 
-## Contributing
+- ❌ Running tests multiple times "just to be sure"
+- ❌ Creating verbose documentation after every change
+- ❌ Running code review on own changes
+- ❌ Over-engineering and premature optimization
+- ❌ Analysis paralysis on small decisions
 
-When modifying agents:
-1. Keep expertise focused and clear
-2. Update guidelines based on project evolution
-3. Add new agents as the tech stack grows
-4. Test agent responses for quality
+Instead, agents:
 
-## Support
+- ✅ Test once, move on
+- ✅ Commit logical units of work
+- ✅ Focus on shipping working code
+- ✅ Iterate based on feedback
+- ✅ Prefer simple solutions over complex ones
 
-For issues or questions about these agents, please open an issue in the repository.
+## 📚 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | Vue.js 3 + Tailwind CSS + Pinia |
+| Backend | Laravel 10 + PHP 8.2 |
+| Database | PostgreSQL 15 |
+| Auth | Laravel Sanctum (SPA) |
+| Containerization | Docker Compose |
+| Web Server | Nginx |
+
+## 🎨 Roles
+
+The platform supports three user roles:
+
+1. **Customer** - Browse products, add to cart, checkout, view orders
+2. **Admin** - Manage products, categories, orders, users, generate promo codes
+3. **Picker** - View pending orders, mark items as picked, update order status
+
+## 🔧 Configuration
+
+Agents use `claude-3-5-sonnet` model for optimal performance and accuracy.
+
+For customization, edit the `.agent.md` files directly with your project-specific requirements.

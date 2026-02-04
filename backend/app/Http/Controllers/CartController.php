@@ -33,7 +33,16 @@ class CartController extends Controller
         $cart->load('items.product');
 
         return response()->json([
-            'items' => $cart->items,
+            'items' => $cart->items->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'product_id' => $item->product_id,
+                    'name' => $item->product->name,
+                    'price' => $item->product->price,
+                    'image' => $item->product->image,
+                    'quantity' => $item->quantity,
+                ];
+            }),
             'total' => $cart->getTotal(),
         ]);
     }
@@ -129,6 +138,47 @@ class CartController extends Controller
             'message' => 'Cart cleared',
             'items' => [],
             'total' => 0,
+        ]);
+    }
+
+    public function sync(Request $request)
+    {
+        $request->validate([
+            'items' => 'required|array',
+            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.quantity' => 'required|integer|min:1',
+        ]);
+
+        $cart = $this->getOrCreateCart($request);
+        
+        // Clear existing items and add new ones
+        $cart->items()->delete();
+        
+        foreach ($request->items as $item) {
+            $product = Product::find($item['product_id']);
+            if ($product && $product->stock >= $item['quantity']) {
+                CartItem::create([
+                    'cart_id' => $cart->id,
+                    'product_id' => $item['product_id'],
+                    'quantity' => min($item['quantity'], $product->stock),
+                ]);
+            }
+        }
+
+        $cart->load('items.product');
+
+        return response()->json([
+            'message' => 'Cart synced',
+            'items' => $cart->items->map(function ($item) {
+                return [
+                    'product_id' => $item->product_id,
+                    'name' => $item->product->name,
+                    'price' => $item->product->price,
+                    'image' => $item->product->image,
+                    'quantity' => $item->quantity,
+                ];
+            }),
+            'total' => $cart->getTotal(),
         ]);
     }
 }

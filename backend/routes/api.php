@@ -26,9 +26,13 @@ Route::middleware('auth:sanctum')->group(function () {
     // Cart routes
     Route::get('/cart', [CartController::class, 'index']);
     Route::post('/cart/items', [CartController::class, 'addItem']);
+    Route::post('/cart/sync', [CartController::class, 'sync']);
     Route::put('/cart/items/{cartItem}', [CartController::class, 'updateItem']);
     Route::delete('/cart/items/{cartItem}', [CartController::class, 'removeItem']);
     Route::delete('/cart', [CartController::class, 'clear']);
+    
+    // Promo code validation (for customers)
+    Route::post('/promo-codes/validate', [App\Http\Controllers\PromoCodeController::class, 'validate']);
 
     // Order routes
     Route::post('/orders', [OrderController::class, 'store']);

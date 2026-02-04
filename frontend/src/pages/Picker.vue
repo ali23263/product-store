@@ -103,29 +103,11 @@
           
           <button 
             v-if="order.status === 'processing'"
-            @click="updateOrderStatus(order, 'ready')"
-            :disabled="ordersStore.loading"
-            class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
-          >
-            Mark as Ready
-          </button>
-          
-          <button 
-            v-if="order.status === 'ready'"
-            @click="updateOrderStatus(order, 'shipped')"
-            :disabled="ordersStore.loading"
-            class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
-          >
-            Mark as Shipped
-          </button>
-          
-          <button 
-            v-if="order.status === 'shipped'"
-            @click="updateOrderStatus(order, 'delivered')"
+            @click="updateOrderStatus(order, 'completed')"
             :disabled="ordersStore.loading"
             class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
           >
-            Mark as Delivered
+            Mark as Completed
           </button>
 
           <button 
@@ -212,17 +194,14 @@ const statusFilters = [
   { value: 'all', label: 'All Orders' },
   { value: 'pending', label: 'Pending' },
   { value: 'processing', label: 'Processing' },
-  { value: 'ready', label: 'Ready' },
-  { value: 'shipped', label: 'Shipped' },
-  { value: 'delivered', label: 'Delivered' },
+  { value: 'completed', label: 'Completed' },
+  { value: 'cancelled', label: 'Cancelled' },
 ]
 
 const statusClasses = {
   pending: 'bg-yellow-100 text-yellow-800',
   processing: 'bg-blue-100 text-blue-800',
-  ready: 'bg-purple-100 text-purple-800',
-  shipped: 'bg-indigo-100 text-indigo-800',
-  delivered: 'bg-green-100 text-green-800',
+  completed: 'bg-green-100 text-green-800',
   cancelled: 'bg-red-100 text-red-800',
 }
 

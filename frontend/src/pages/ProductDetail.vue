@@ -180,9 +180,9 @@ const decrementQuantity = () => {
   }
 }
 
-const handleAddToCart = () => {
+const handleAddToCart = async () => {
   if (product.value && product.value.stock > 0) {
-    cartStore.addItem(product.value, quantity.value)
+    await cartStore.addItem(product.value, quantity.value)
     quantity.value = 1
   }
 }

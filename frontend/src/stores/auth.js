@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { authAPI } from '@/services/api'
 import router from '@/router'
 import { useToast } from '@/utils/toast'
+import { useCartStore } from '@/stores/cart'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
@@ -30,11 +31,15 @@ export const useAuthStore = defineStore('auth', () => {
       loading.value = true
       const response = await authAPI.login(credentials)
       
-      token.value = response.data.token
+      token.value = response.data.access_token
       user.value = response.data.user
       
       localStorage.setItem('auth_token', token.value)
       localStorage.setItem('user', JSON.stringify(user.value))
+      
+      // Sync local cart to server after successful login
+      const cartStore = useCartStore()
+      await cartStore.syncCartToServer()
       
       showToast('Login successful!', 'success')
       
@@ -62,11 +67,15 @@ export const useAuthStore = defineStore('auth', () => {
       loading.value = true
       const response = await authAPI.register(userData)
       
-      token.value = response.data.token
+      token.value = response.data.access_token
       user.value = response.data.user
       
       localStorage.setItem('auth_token', token.value)
       localStorage.setItem('user', JSON.stringify(user.value))
+      
+      // Sync local cart to server after successful registration
+      const cartStore = useCartStore()
+      await cartStore.syncCartToServer()
       
       showToast('Registration successful!', 'success')
       router.push('/')
@@ -87,6 +96,10 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (error) {
       console.error('Logout error:', error)
     } finally {
+      // Clear cart when logging out
+      const cartStore = useCartStore()
+      await cartStore.clearCart()
+      
       token.value = null
       user.value = null
       localStorage.removeItem('auth_token')

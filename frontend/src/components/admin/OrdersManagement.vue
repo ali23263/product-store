@@ -35,9 +35,7 @@
                 >
                   <option value="pending">Pending</option>
                   <option value="processing">Processing</option>
-                  <option value="ready">Ready</option>
-                  <option value="shipped">Shipped</option>
-                  <option value="delivered">Delivered</option>
+                  <option value="completed">Completed</option>
                   <option value="cancelled">Cancelled</option>
                 </select>
               </td>
@@ -106,7 +104,7 @@ const selectedOrder = ref(null)
 onMounted(async () => {
   loading.value = true
   try {
-    const response = await ordersAPI.getAll()
+    const response = await ordersAPI.getAllAdmin()
     orders.value = response.data.data || response.data
   } catch (error) {
     showToast('Failed to load orders', 'error')
@@ -117,7 +115,7 @@ onMounted(async () => {
 
 const updateStatus = async (order, newStatus) => {
   try {
-    await ordersAPI.updateStatus(order.id, newStatus)
+    await ordersAPI.updateStatusAdmin(order.id, newStatus)
     order.status = newStatus
     showToast('Order status updated', 'success')
   } catch (error) {

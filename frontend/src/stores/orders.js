@@ -24,6 +24,19 @@ export const useOrdersStore = defineStore('orders', () => {
     }
   }
 
+  const fetchPickerOrders = async (params = {}) => {
+    try {
+      loading.value = true
+      const response = await ordersAPI.getAllPicker(params)
+      orders.value = response.data.data || response.data
+    } catch (error) {
+      showToast('Failed to load orders', 'error')
+      console.error('Fetch picker orders error:', error)
+    } finally {
+      loading.value = false
+    }
+  }
+
   const fetchOrderById = async (id) => {
     try {
       loading.value = true
@@ -38,27 +51,24 @@ export const useOrdersStore = defineStore('orders', () => {
     }
   }
 
-  const createOrder = async (orderData) => {
+  const createOrder = async (orderData = {}) => {
     try {
       loading.value = true
       const cartStore = useCartStore()
       
       const data = {
-        items: cartStore.items.map(item => ({
-          product_id: item.id,
-          quantity: item.quantity,
-          price: item.price,
-        })),
         promo_code: appliedPromo.value?.code || null,
         ...orderData,
       }
       
       const response = await ordersAPI.create(data)
-      orders.value.unshift(response.data)
-      cartStore.clearCart()
+      // Backend returns { message, order }
+      const order = response.data.order || response.data
+      orders.value.unshift(order)
+      await cartStore.clearCart()
       appliedPromo.value = null
       showToast('Order placed successfully!', 'success')
-      return response.data
+      return order
     } catch (error) {
       const message = error.response?.data?.message || 'Failed to create order'
       showToast(message, 'error')
@@ -114,6 +124,7 @@ export const useOrdersStore = defineStore('orders', () => {
     appliedPromo,
     loading,
     fetchOrders,
+    fetchPickerOrders,
     fetchOrderById,
     createOrder,
     updateOrderStatus,

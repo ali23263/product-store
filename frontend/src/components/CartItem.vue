@@ -22,8 +22,9 @@
     <!-- Quantity controls -->
     <div class="flex items-center space-x-2">
       <button 
-        @click="cartStore.decrementQuantity(item.id)"
-        class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
+        @click="handleDecrement"
+        :disabled="cartStore.loading"
+        class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
@@ -33,9 +34,9 @@
       <span class="w-12 text-center font-semibold">{{ item.quantity }}</span>
       
       <button 
-        @click="cartStore.incrementQuantity(item.id)"
-        class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
-        :disabled="item.quantity >= item.stock"
+        @click="handleIncrement"
+        :disabled="item.quantity >= item.stock || cartStore.loading"
+        class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -50,8 +51,9 @@
 
     <!-- Remove button -->
     <button 
-      @click="cartStore.removeItem(item.id)"
-      class="text-red-500 hover:text-red-700 transition-colors"
+      @click="handleRemove"
+      :disabled="cartStore.loading"
+      class="text-red-500 hover:text-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -64,7 +66,7 @@
 import { useCartStore } from '@/stores/cart'
 import { formatCurrency } from '@/utils/helpers'
 
-defineProps({
+const props = defineProps({
   item: {
     type: Object,
     required: true,
@@ -72,4 +74,16 @@ defineProps({
 })
 
 const cartStore = useCartStore()
+
+const handleIncrement = async () => {
+  await cartStore.incrementQuantity(props.item.id)
+}
+
+const handleDecrement = async () => {
+  await cartStore.decrementQuantity(props.item.id)
+}
+
+const handleRemove = async () => {
+  await cartStore.removeItem(props.item.id)
+}
 </script>

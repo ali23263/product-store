@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '@/router'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -75,8 +75,11 @@ export const ordersAPI = {
   getAll: (params) => api.get('/orders', { params }),
   getById: (id) => api.get(`/orders/${id}`),
   create: (data) => api.post('/orders', data),
-  updateStatus: (id, status) => api.patch(`/orders/${id}/status`, { status }),
+  updateStatus: (id, status) => api.put(`/orders/${id}/status`, { status }),
   applyPromo: (code) => api.post('/orders/apply-promo', { code }),
+  getAllAdmin: (params) => api.get('/admin/orders', { params }),
+  updateStatusAdmin: (id, status) => api.put(`/admin/orders/${id}/status`, { status }),
+  getAllPicker: (params) => api.get('/picker/orders', { params }),
 }
 
 // Promo codes endpoints
@@ -89,15 +92,22 @@ export const promoCodesAPI = {
 
 // Users endpoints (admin)
 export const usersAPI = {
-  getAll: (params) => api.get('/users', { params }),
-  getById: (id) => api.get(`/users/${id}`),
-  update: (id, data) => api.put(`/users/${id}`, data),
-  delete: (id) => api.delete(`/users/${id}`),
+  getAll: (params) => api.get('/admin/users', { params }),
+  updateRole: (id, role) => api.put(`/admin/users/${id}/role`, { role }),
 }
 
 // Stats endpoints (admin)
 export const statsAPI = {
-  getDashboard: () => api.get('/stats/dashboard'),
+  getDashboard: () => api.get('/admin/dashboard'),
+}
+
+// Cart endpoints
+export const cartAPI = {
+  getCart: () => api.get('/cart'),
+  addItem: (productId, quantity) => api.post('/cart/items', { product_id: productId, quantity }),
+  updateItem: (id, quantity) => api.put(`/cart/items/${id}`, { quantity }),
+  removeItem: (id) => api.delete(`/cart/items/${id}`),
+  clearCart: () => api.delete('/cart'),
 }
 
 export default api

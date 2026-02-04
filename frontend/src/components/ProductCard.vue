@@ -78,9 +78,9 @@ const goToProduct = () => {
   router.push(`/product/${props.product.id}`)
 }
 
-const addToCart = () => {
+const addToCart = async () => {
   if (props.product.stock > 0) {
-    cartStore.addItem(props.product)
+    await cartStore.addItem(props.product)
   }
 }
 </script>

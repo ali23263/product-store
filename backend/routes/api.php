@@ -76,8 +76,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/admin/orders/{id}/status', [OrderController::class, 'updateStatus']);
     });
 
-    // Admin and Picker routes (order status updates)
+    // Admin and Picker routes (order management)
     Route::middleware(['role:admin,picker'])->group(function () {
+        Route::get('/picker/orders', [OrderController::class, 'getAllOrders']);
         Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus']);
     });
 });
